@@ -11,7 +11,7 @@
     ],
     "autoload": {
         "files": [
-            "src/function.php"
+            "src/helper.php"
         ],
         "psr-4": {
             
