@@ -1,0 +1,22 @@
+{
+    "name": "shinyboys/library",
+    "description": "dev pack",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "liang",
+            "email": "23426945@qq.com"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "src/function.php"
+        ],
+        "psr-4": {
+            
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}
