@@ -6,12 +6,14 @@
 // | Author: liang <23426945@qq.com>
 // +----------------------------------------------------------------------
 
+declare (strict_types = 1);
+
 if ( ! function_exists('page') )
 {
     /**
      * 获取分页参数
      */
-    function page($page = 1, $limit = 10)
+    function page(int $page = 1, int $limit = 10)
     {
         return [$_GET['page'] ?? $page, $_GET['limit'] ?? $limit];
     }

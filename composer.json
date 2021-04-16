@@ -11,7 +11,8 @@
     ],
     "autoload": {
         "files": [
-            "src/helper.php"
+            "src/helper.php",
+            "src/layui.php"
         ],
         "psr-4": {
             
