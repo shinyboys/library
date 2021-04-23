@@ -11,10 +11,12 @@
     ],
     "autoload": {
         "files": [
-            "src/helper.php",
-            "src/layui.php"
+            "src/helper.php"
         ],
         "psr-4": {
+            
+        },
+        "psr-0": {
             
         }
     },

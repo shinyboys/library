@@ -8,21 +8,11 @@
 
 declare (strict_types = 1);
 
-if ( ! function_exists('page') )
-{
-    /**
-     * 获取分页参数
-     */
-    function page(int $page = 1, int $limit = 10)
-    {
-        return [$_GET['page'] ?? $page, $_GET['limit'] ?? $limit];
-    }
-}
-
 if ( ! function_exists('getRandString') )
 {
     /**
      * 生成指定长度的随机字符串
+	 * 
      * @param integer $length 长度
      * @return string 随机字符串
      */
@@ -41,6 +31,7 @@ if ( ! function_exists('generateOrdersn') )
 {
     /**
      * 随机生成18位数字订单号(18位:不包含前缀)
+	 * 
      * @param string $prefix 订单号前缀
      * @return string 随机订单号
      */
@@ -54,6 +45,7 @@ if ( ! function_exists('wordTime') )
 {
     /**
      * 将时间戳转为文字时间
+	 * 
      * @param integer $time
      */
     function wordTime(int $time)
@@ -82,6 +74,7 @@ if ( ! function_exists('formatNumber') )
 {
     /**
      * 整数格式化, 单位转换
+	 * 
      * @param integer $num
      */
     function formatNumber(int $num)
@@ -105,3 +98,111 @@ if ( ! function_exists('formatNumber') )
     }
 }
 
+// +----------------------------------------------------------------------
+// | Api
+// +----------------------------------------------------------------------
+
+if ( ! function_exists('data') )
+{
+	/**
+	 * 返回数据
+	 *
+	 * @param string $msg
+	 * @param object $data
+	 * @param integer $code
+	 * @return void
+	 */
+	function data(string $msg, object $data, int $code = 0)
+	{
+		return json_encode(compact('code', 'msg', 'data'), JSON_UNESCAPED_UNICODE);
+	}
+}
+
+if ( ! function_exists('msg') )
+{
+	/**
+	 * 操作成功
+	 *
+	 * @param string  $msg
+	 * @param integer $code
+	 */
+	function msg(string $msg = "", int $code = 0)
+	{
+		throw new \Exception($msg, $code);
+	}
+}
+
+if ( ! function_exists('fault') )
+{
+	/**
+	 * 返回错误信息
+	 *
+	 * @param string  $msg
+	 * @param integer $code
+	 */
+	function fault(string $msg = "", int $code = 1)
+	{
+		throw new \Exception($msg, $code);
+	}
+}
+
+// +----------------------------------------------------------------------
+// | ThinkPHP
+// +----------------------------------------------------------------------
+
+if ( ! function_exists('page') )
+{
+    /**
+     * 获取分页参数
+     *
+     * @param integer $page  默认页码
+     * @param integer $limit 默认每页数据条数
+     * @return array
+	 * @example page(...page())
+     */
+    function page(int $page = 1, int $limit = 10)
+    {
+        return [$_GET['page'] ?? $page, $_GET['limit'] ?? $limit];
+    }
+}
+
+if ( ! function_exists('search') )
+{
+    /**
+     * 用于ThinkPHP搜索器
+     * 
+     * @param string $fields
+     * @return array
+     * @example withSearch(...search('id,name'))
+     */
+    function search(string $fields)
+    {
+        $array = array_filter(explode(',', $fields));
+        $build = [];
+        foreach ($array as $v) {
+            $key = trim($v);
+            if (!empty($key)) $build[$key] = isset($_GET[$key]) ? trim($_GET[$key]) : '';
+        }
+        return [array_keys($build), $build];
+    }
+}
+
+// +----------------------------------------------------------------------
+// | Layui
+// +----------------------------------------------------------------------
+
+if ( ! function_exists('table') )
+{
+	/**
+	 * 数据表格接口数据格式
+	 *
+	 * @param string  $msg
+	 * @param integer $count
+	 * @param array   $data
+	 * @param integer $code
+	 */
+    function table(string $msg, int $count, array $data, int $code = 0)
+    {
+        return json_encode(compact('code', 'msg', 'count', 'data'), JSON_UNESCAPED_UNICODE);
+    }
+}
