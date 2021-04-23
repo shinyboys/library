@@ -17,9 +17,11 @@
             
         },
         "psr-0": {
-            
+            "": "src/extend/"
         }
     },
-    "minimum-stability": "dev",
-    "require": {}
+    "minimum-stability": "stable",
+    "require": {
+        "firebase/php-jwt": "^5.2"
+    }
 }
